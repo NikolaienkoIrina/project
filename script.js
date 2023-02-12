@@ -16,11 +16,9 @@ let personalMovieDB = {
         movies: {},
         actors: {},
         genres: [],
-        privat: false
-};
-
-function rememberMyFilms() {
-        for (let i=0; i<2; i++) {
+        privat: false,
+        rememberMyFilms() {
+           for (let i=0; i<2; i++) {
                 let film = prompt("Один из последних просмотренных фильмов?");
                 let markFilm = prompt("На сколько оцените его?"); 
         
@@ -31,12 +29,9 @@ function rememberMyFilms() {
                 else {
                         i--;
                 }
-        }  
-}
-
-rememberMyFilms();
-
- function detectPersonalLevel() {
+           }
+        },    
+        detectPersonalLevel() {
         if (personalMovieDB.count > 0 && personalMovieDB.count < 10) {
                 console.log ("Просмотрено довольно мало фильмов");
         }
@@ -49,25 +44,41 @@ rememberMyFilms();
         else {
                 console.log ("Произошла ошибка");
         }
- }
- detectPersonalLevel();
+        },
+        showMyDb() {
+                if (personalMovieDB.privat == true) {
+                        console.log (personalMovieDB);
+                }
+        },
+        writeYourGenres() {
+                for (let i=0; i<3; i++){
+                let num = i+1;
+                let numberGenres;
+                while (numberGenres == "" || numberGenres == null) {
+                     numberGenres = prompt(`Ваш любимый жанр под номером ${num}?`);   
+                }
+                personalMovieDB.genres[i] = numberGenres;
+                }
+                personalMovieDB.genres.forEach(element => {
+                        let n = personalMovieDB.genres.indexOf(element) + 1;
+                        console.log (`Любимый жанр ${n} - это ${element}`);
+                });
+         },
+        toggleVisibleMyDB() {
+                if (personalMovieDB.privat == false) {
+                    personalMovieDB.privat = true;   
+                }
+                else {personalMovieDB.privat = false;}
+        } 
+        
+};
 
- function showMyDb() {
-        if (personalMovieDB.privat == false) {
-                console.log (personalMovieDB);
-        }
- }
- showMyDb();
 
- function writeYourGenres() {
-        for (let i=0; i<3; i++){
-        let num = i+1;
-        let numberGenres = prompt(`Ваш любимый жанр под номером ${num}?`);
-        personalMovieDB.genres[i] = numberGenres;
-        }
- }
-
- writeYourGenres();
+personalMovieDB.rememberMyFilms();
+personalMovieDB.detectPersonalLevel();
+personalMovieDB.toggleVisibleMyDB();
+personalMovieDB.showMyDb();
+personalMovieDB.writeYourGenres();
 
 
 
